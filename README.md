@@ -11,7 +11,7 @@ stores the history, and charts it.
 
 - **Next.js 16** (App Router) + **React 19** + **TypeScript**
 - **Tailwind CSS v4**
-- **Native PWA** (Next 16 `manifest.ts` + service worker; installs to a phone home screen)
+- **Serwist PWA** (offline shell + installable to a phone home screen; `manifest.ts` + generated service worker)
 - **Neon** serverless Postgres + **Drizzle ORM** (history storage — Phase 4)
 - **Recharts** (+ Tremor Raw copy-paste components) for charts
 - **Zod** for env/response validation
@@ -28,7 +28,7 @@ npm run dev                  # http://localhost:3000
 Other scripts:
 
 ```bash
-npm run build       # production build (Turbopack)
+npm run build       # production build (webpack — required by Serwist)
 npm run typecheck   # tsc --noEmit
 npm run lint        # eslint
 npm run pull:page   # Phase 3 — pull one page's insights and print them
@@ -40,6 +40,9 @@ All secrets live in `.env.local` (git-ignored). Only `.env.example` (placeholder
 is committed. See `.env.example` for the full list — Facebook app id/secret, a
 token (`FB_SYSTEM_USER_TOKEN` preferred, or `FB_PAGE_TOKEN`), `FB_PAGE_IDS`,
 `DATABASE_URL`, and `CRON_SECRET`.
+
+**Connecting everything (token, database, deploy): see [SETUP.md](./SETUP.md).**
+The app runs fully on sample data until you do.
 
 ## Graph API metric strategy
 

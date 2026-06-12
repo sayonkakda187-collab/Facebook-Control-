@@ -1,4 +1,5 @@
 import { getConnectionStatus } from "@/lib/status";
+import { getEnv } from "@/lib/env";
 import { SiteHeader } from "@/components/site/header";
 import { Card, CardTitle } from "@/components/ui/card";
 import { ALL_CANDIDATE_PAGE_METRICS } from "@/lib/metrics";
@@ -43,6 +44,7 @@ function Row({
 
 export default async function StatusPage() {
   const s = await getConnectionStatus();
+  const gated = Boolean(getEnv().DASHBOARD_PASSWORD);
 
   // Headline connection state
   let headline: { tone: Tone; title: string; detail?: string };
@@ -62,7 +64,7 @@ export default async function StatusPage() {
 
   return (
     <div>
-      <SiteHeader />
+      <SiteHeader gated={gated} />
       <main className="mx-auto max-w-3xl px-5 py-8 sm:px-8">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold tracking-tight">Connection status</h1>

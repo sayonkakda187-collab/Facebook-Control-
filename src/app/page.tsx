@@ -1,4 +1,5 @@
 import { getDashboard } from "@/lib/data";
+import { getEnv } from "@/lib/env";
 import { SiteHeader } from "@/components/site/header";
 import { Card, CardTitle } from "@/components/ui/card";
 import { KpiCard } from "@/components/dashboard/kpi-card";
@@ -25,13 +26,14 @@ export default async function Home({
 }) {
   const sp = await searchParams;
   const dash = await getDashboard(typeof sp.page === "string" ? sp.page : undefined);
+  const gated = Boolean(getEnv().DASHBOARD_PASSWORD);
 
   const pageViews = dash.kpis.find((k) => k.metric === "page_views_total");
   const engagement = dash.kpis.find((k) => k.metric === "page_post_engagements");
 
   return (
     <div>
-      <SiteHeader />
+      <SiteHeader gated={gated} />
       <main className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>

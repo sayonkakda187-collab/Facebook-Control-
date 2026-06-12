@@ -38,6 +38,11 @@ yarn-error.log*
 /.scratch/*
 !/.scratch/.gitkeep
 
+# Serwist-generated service worker (built during `next build`)
+/public/sw.js
+/public/sw.js.map
+/public/swe-worker-*.js
+
 # vercel
 .vercel
 

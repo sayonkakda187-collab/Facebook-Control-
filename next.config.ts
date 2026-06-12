@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import withSerwistInit from "@serwist/next";
 
 const nextConfig: NextConfig = {
   async headers() {
@@ -31,4 +32,14 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Serwist generates the service worker from src/app/sw.ts at build time.
+// It hooks into webpack, so production builds run with `next build --webpack`.
+// Disabled in development to avoid interfering with HMR / Turbopack.
+const withSerwist = withSerwistInit({
+  swSrc: "src/app/sw.ts",
+  swDest: "public/sw.js",
+  disable: process.env.NODE_ENV !== "production",
+  reloadOnOnline: true,
+});
+
+export default withSerwist(nextConfig);

@@ -9,7 +9,7 @@ const NAV = [
   { href: "/status", label: "Status" },
 ];
 
-export function SiteHeader() {
+export function SiteHeader({ gated = false }: { gated?: boolean }) {
   const pathname = usePathname();
 
   return (
@@ -41,6 +41,14 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          {gated && (
+            <a
+              href="/api/auth/logout"
+              className="rounded-lg px-3 py-1.5 text-zinc-500 transition-colors hover:bg-zinc-900 hover:text-zinc-300"
+            >
+              Sign out
+            </a>
+          )}
         </nav>
       </div>
     </header>
